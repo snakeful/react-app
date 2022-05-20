@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import ListGifs from './ListGifs';
 
 const SearchGifs = () => {
-  const [keyword, setKeyword] = useState('programming');
-  const [searchKeyword, setSearchKeyword] = useState('programming');
-  const onChange = (event) => {
-    return setKeyword(event.target.value);
+  const [keyword, setKeyword] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const handleChange = (event) => {
+    setKeyword(event.target.value);
   };
-  const search = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     setSearchKeyword(keyword)
   };
-  return <div>
-    <input type='text' value={keyword} onChange={onChange} />
-    <button onClick={search}>Search Gifs</button>
+  return <form onSubmit={handleSubmit}>
+    <input type='text' value={keyword} onChange={handleChange} />
+    <button type="submit">Search Gifs</button>
     <ListGifs keyword={searchKeyword} />
-  </div>
+  </form>
 };
 
 export default SearchGifs;
